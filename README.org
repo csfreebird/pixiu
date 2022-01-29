@@ -15,11 +15,11 @@
      #+end_src
   3. 测试使用
      #+begin_src python :results output
-       from pixiu import date
-       s, e = date.get_date_range()
+       from pixiu import dt
+       s, e = dt.get_date_range()
        print(s, ":", e)
      #+end_src
 
      #+RESULTS:
-     : 2022-01-19 : 2022-01-29
+     : 2022-01-23 : 2022-01-29
      
