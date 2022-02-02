@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+import pymongo
+
 
 def get_date_range(days=-6):
     """
@@ -44,3 +46,8 @@ def get_report_dates():
         d18 = '{:d}-06-30'.format(this_year-9)
         d20 = '{:d}-06-30'.format(this_year-10)
     return [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20]
+
+
+def get_latest_day(tbl):
+    docs = tbl.find({}).sort([('日期', pymongo.DESCENDING)]).limit(1)
+    return docs[0]['日期']
