@@ -35,3 +35,52 @@ def linear_predict(row, data_cols, new_col_name):
     y_new = model.predict([max(x) + 1])
     row[new_col_name] = y_new[0]
     return row
+
+
+def sumColumns(self, rowStart, rowEnd):
+    """
+    将[rowStart, rowEnd)范围的所有的数值column求和
+    @return 返回一个Series对象
+    """
+    df2 = self.df.iloc[rowStart:rowEnd:]
+    sumResult = df2.sum(axis=0, skipna=True)
+    return sumResult
+
+
+def sumColumn(self, rowStart, rowEnd, colName):
+    """
+    将[rowStart, rowEnd)范围的所有的数值column求和
+    @return 返回数值
+    """
+    df2 = self.df.iloc[rowStart:rowEnd:]
+    return sum(df2[colName])
+
+
+def avgColumn(self, rowStart, rowEnd, colName):
+    """
+    将[rowStart, rowEnd)范围的所有的数值column求和
+    @return 返回一个Series对象
+    """
+    df2 = self.df.iloc[rowStart:rowEnd:]
+    s = 0.0
+    for v in df2[colName].values:
+        s += v
+    return s / len(df2[colName].values)
+
+
+def to_float(df1, col_name1, col_name2):
+    """
+    修改类型，并且替换字段名
+    """
+    df1[col_name2] = [0 if x == "" else float(x) for x in df1[col_name1]]
+    df1.pop(col_name1)
+    return df1
+
+
+def to_int(df1, col_name1, col_name2):
+    """
+    修改类型，并且替换字段名
+    """
+    df1[col_name2] = [0 if x == "" else int(x) for x in df1[col_name1]]
+    df1.pop(col_name1)
+    return df1
