@@ -17,6 +17,11 @@ def print_full(x):
     pd.reset_option('display.max_colwidth')
 
 
+def to_date_str(df, column_name):
+    df[column_name] = df[column_name].map(lambda e: str(e.date()))
+    return df
+
+
 def linear_predict(row, data_cols, new_col_name):
     """
     用于dataframe.apply
