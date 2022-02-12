@@ -3,6 +3,14 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 
+def is_none(v):
+    if v != v:
+        return True
+    if v is None:
+        return True
+    return False
+
+
 def print_full(x):
     pd.set_option('display.max_rows', len(x))
     pd.set_option('display.max_columns', None)
@@ -15,6 +23,38 @@ def print_full(x):
     pd.reset_option('display.width')
     pd.reset_option('display.float_format')
     pd.reset_option('display.max_colwidth')
+
+
+def to_float_money(e):
+    """
+    如果值无效，默认为0.0
+    如果包含'--'等表示空置的字符，默认为0.0
+    如果包含单位元或者','符号，去除掉
+    如果本身就是float类型，直接返回
+    """
+    if is_none(e):
+        return 0.0
+    if isinstance(e, float):
+        return e
+    str = e.replace('元', '').replace(',', '').replace('，', '')
+    if str in ['--', '-', '', '-']:
+        return 0.0
+    return float(str)
+
+
+def to_float(df1, col_name1, col_name2):
+    """
+    简单版本的修改字段类型
+    修改类型，并且替换字段名
+    """
+    df1[col_name2] = [0 if x == "" else float(x) for x in df1[col_name1]]
+    df1.pop(col_name1)
+    return df1
+
+
+def percent_to_float(e):
+    v = to_float_money(e)
+    return v / 100.0
 
 
 def to_date_str(df, column_name):
@@ -75,14 +115,6 @@ def avgColumn(self, rowStart, rowEnd, colName):
         s += v
     return s / len(df2[colName].values)
 
-
-def to_float(df1, col_name1, col_name2):
-    """
-    修改类型，并且替换字段名
-    """
-    df1[col_name2] = [0 if x == "" else float(x) for x in df1[col_name1]]
-    df1.pop(col_name1)
-    return df1
 
 
 def to_int(df1, col_name1, col_name2):
