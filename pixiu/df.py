@@ -18,6 +18,9 @@ def print_full(x):
 
 
 def to_date_str(df, column_name):
+    """
+    将datetime类型转换成类似"2020-01-02"的日期字符串
+    """
     df[column_name] = df[column_name].map(lambda e: str(e.date()))
     return df
 
