@@ -14,8 +14,25 @@ def get_date_range(days=-6):
     return str(start), str(today)
 
 
+def get_fin_report_dates():
+    """
+    获得财报日期
+    """
+    start_year = 2011
+    today = date.today()
+    this_year = today.year
+    report_dates = []
+    for y in range(start_year, this_year+1):
+        report_dates.append('{}-03-31'.format(y))
+        report_dates.append('{}-06-30'.format(y))
+        report_dates.append('{}-09-30'.format(y))
+        report_dates.append('{}-12-31'.format(y))
+    return report_dates
+
+
 def get_report_dates():
     '''
+    分红报告日期
     找到当前日期最近的12-31和06-30的20次日期(10年)
     '''
     today = date.today()
