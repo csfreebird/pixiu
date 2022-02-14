@@ -2,6 +2,54 @@ import akshare as ak
 from pixiu import df
 
 
+def parse(code):
+    """
+    根据代码前缀解析出交易所和板块
+    当前北交所和新三板暂时放在一起，因为我不太关心小盘股
+    """
+    if code.startswith('688'):
+        return '上海', '科创'
+    if code.startswith('600'):
+        return '上海', '主板'
+    if code.startswith('601'):
+        return '上海', '主板'
+    if code.startswith('603'):
+        return '上海', '主板'
+    if code.startswith('605'):
+        return '上海', '主板'
+    if code.startswith('300'):
+        return '深圳', '创业板'
+    if code.startswith('301'):
+        return '深圳', '创业板'
+    if code.startswith('000'):
+        return '深圳', '主板'
+    if code.startswith('001'):
+        return '深圳', '主板'
+    if code.startswith('002'):
+        return '深圳', '主板'
+    if code.startswith('003'):
+        return '深圳', '主板'
+    if code.startswith('43'):
+        return '北京_三板', '新三板'
+    if code.startswith('83'):
+        return '北京_三板', '新三板'
+    if code.startswith('87'):
+        return '北京_三板', '新三板'
+    else:
+        return '', ''
+
+
+def get_code_for_eastmoney(exchange, code):
+    '''
+    用于东财资产负载表下载
+    '''
+    if exchange == '上海':
+        return 'SH{}'.format(code)
+    if exchange == '深圳':
+        return 'SZ{}'.format(code)
+    return None
+
+
 class Stock:
     def __init__(self, code, name, exchange, bankuai):
         self.code = code
@@ -15,42 +63,6 @@ class Stock:
         if self.exchange == '深圳':
             return 'sz.{}'.format(self.code)
         return None
-
-    def parse(code):
-        """
-        根据代码前缀解析出交易所和板块
-        当前北交所和新三板暂时放在一起，因为我不太关心小盘股
-        """
-        if code.startswith('688'):
-            return '上海', '科创'
-        if code.startswith('600'):
-            return '上海', '主板'
-        if code.startswith('601'):
-            return '上海', '主板'
-        if code.startswith('603'):
-            return '上海', '主板'
-        if code.startswith('605'):
-            return '上海', '主板'
-        if code.startswith('300'):
-            return '深圳', '创业板'
-        if code.startswith('301'):
-            return '深圳', '创业板'
-        if code.startswith('000'):
-            return '深圳', '主板'
-        if code.startswith('001'):
-            return '深圳', '主板'
-        if code.startswith('002'):
-            return '深圳', '主板'
-        if code.startswith('003'):
-            return '深圳', '主板'
-        if code.startswith('43'):
-            return '北京_三板', '新三板'
-        if code.startswith('83'):
-            return '北京_三板', '新三板'
-        if code.startswith('87'):
-            return '北京_三板', '新三板'
-        else:
-            return '', ''
 
 
 def remove_prefix(code):
