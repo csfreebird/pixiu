@@ -48,7 +48,8 @@ def to_float(df1, col_name1, col_name2):
     修改类型，并且替换字段名
     """
     df1[col_name2] = [0 if x == "" else float(x) for x in df1[col_name1]]
-    df1.pop(col_name1)
+    if col_name1 != col_name2:
+        df1.pop(col_name1)
     return df1
 
 
@@ -114,7 +115,6 @@ def avgColumn(self, rowStart, rowEnd, colName):
     for v in df2[colName].values:
         s += v
     return s / len(df2[colName].values)
-
 
 
 def to_int(df1, col_name1, col_name2):
