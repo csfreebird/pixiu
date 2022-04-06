@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 import pymongo
 
@@ -12,6 +12,12 @@ def get_date_range(days=-6):
     delta = timedelta(days)
     start = today + delta
     return str(start), str(today)
+
+
+def get_this_year_range():
+    today = datetime.today()
+    year = today.year
+    return year, year+1
 
 
 def get_fin_report_dates():
