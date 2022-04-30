@@ -2,6 +2,38 @@ import akshare as ak
 from pixiu import df
 
 
+def get_code_pre(code):
+    if code.startswith('688'):
+        return '688'
+    if code.startswith('600'):
+        return '600'
+    if code.startswith('601'):
+        return '601'
+    if code.startswith('603'):
+        return '603'
+    if code.startswith('605'):
+        return '605'
+    if code.startswith('300'):
+        return '300'
+    if code.startswith('301'):
+        return '301'
+    if code.startswith('000'):
+        return '000'
+    if code.startswith('001'):
+        return '001'
+    if code.startswith('002'):
+        return '002'
+    if code.startswith('003'):
+        return '003'
+    if code.startswith('43'):
+        return '43'
+    if code.startswith('83'):
+        return '83'
+    if code.startswith('87'):
+        return '87'
+    return None
+
+
 def parse(code):
     """
     根据代码前缀解析出交易所和板块

@@ -11,8 +11,11 @@ def is_none(v):
     return False
 
 
-def print_full(x):
-    pd.set_option('display.max_rows', len(x))
+def print_full(x, num_rows=None):
+    if num_rows is None:
+        pd.set_option('display.max_rows', len(x))
+    else:
+        pd.set_option('display.max_rows', num_rows)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', 2000)
     pd.set_option('display.float_format', '{:20,.2f}'.format)
@@ -60,9 +63,17 @@ def percent_to_float(e):
 
 def to_date_str(df, column_name):
     """
-    将datetime类型转换成类似"2020-01-02"的日期字符串
+    将datetime.datetime类型转换成类似"2020-01-02"的日期字符串
     """
     df[column_name] = df[column_name].map(lambda e: str(e.date()))
+    return df
+
+
+def to_date_str2(df, column_name):
+    """
+    将datetime.date类型转换成类似"2020-01-02"的日期字符串
+    """
+    df[column_name] = df[column_name].map(lambda e: str(e))
     return df
 
 
