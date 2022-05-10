@@ -5,13 +5,15 @@ import pymongo
 
 def get_date_range(days=-6):
     """
-    获取今天以及之前n天(默认为前6天)的日期作为日期范围,
-    返回形式如2022-01-01, 2022-01-06
+    获取[今天之前n天(默认为前6天)的日期, 明天)作为日期范围,
+    返回形式如: 2022-01-01, 2022-01-06
     """
     today = date.today()
+    delta1 = timedelta(1)
+    end = today + delta1
     delta = timedelta(days)
     start = today + delta
-    return str(start), str(today)
+    return str(start), str(end)
 
 
 def get_this_year_range():
