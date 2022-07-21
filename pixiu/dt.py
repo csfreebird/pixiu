@@ -39,37 +39,59 @@ def get_fin_report_dates():
 
 
 def get_report_dates():
+    """
+    分红报告日期
+    找到当前2011年开始的12-31和06-30财报日期
+    """
+    start_year = 2011
+    today = date.today()
+    today_str = str(today)
+    this_year = today.year
+    report_dates = []
+    for y in range(start_year, this_year+1):
+        s1 = '{}-06-30'.format(y)
+        if today_str > s1:
+            report_dates.insert(0, s1)
+        s2 = '{}-12-31'.format(y)
+        if today_str > s2:
+            report_dates.insert(0, s2)
+        report_dates.insert(0, s2)
+    return report_dates
+
+
+def get_report_dates2():
     '''
+    即将废除
     分红报告日期
     找到当前日期最近的12-31和06-30的20次日期(10年)
     '''
     today = date.today()
-    today_str = str(today)
+    # today_str = str(today)
     this_year = today.year
     d1 = '{:d}-12-31'.format(this_year)
-    if d1 > today_str:
-        d1 = '{:d}-12-31'.format(this_year-1)
-        d3 = '{:d}-12-31'.format(this_year-2)
-        d5 = '{:d}-12-31'.format(this_year-3)
-        d7 = '{:d}-12-31'.format(this_year-4)
-        d9 = '{:d}-12-31'.format(this_year-5)
-        d11 = '{:d}-12-31'.format(this_year-6)
-        d13 = '{:d}-12-31'.format(this_year-7)
-        d15 = '{:d}-12-31'.format(this_year-8)
-        d17 = '{:d}-12-31'.format(this_year-9)
-        d19 = '{:d}-12-31'.format(this_year-10)
+    # if d1 > today_str:
+    d1 = '{:d}-12-31'.format(this_year-1)
+    d3 = '{:d}-12-31'.format(this_year-2)
+    d5 = '{:d}-12-31'.format(this_year-3)
+    d7 = '{:d}-12-31'.format(this_year-4)
+    d9 = '{:d}-12-31'.format(this_year-5)
+    d11 = '{:d}-12-31'.format(this_year-6)
+    d13 = '{:d}-12-31'.format(this_year-7)
+    d15 = '{:d}-12-31'.format(this_year-8)
+    d17 = '{:d}-12-31'.format(this_year-9)
+    d19 = '{:d}-12-31'.format(this_year-10)
     d2 = '{:d}-06-30'.format(this_year)
-    if d2 > today_str:
-        d2 = '{:d}-06-30'.format(this_year-1)
-        d4 = '{:d}-06-30'.format(this_year-2)
-        d6 = '{:d}-06-30'.format(this_year-3)
-        d8 = '{:d}-06-30'.format(this_year-4)
-        d10 = '{:d}-06-30'.format(this_year-5)
-        d12 = '{:d}-06-30'.format(this_year-6)
-        d14 = '{:d}-06-30'.format(this_year-7)
-        d16 = '{:d}-06-30'.format(this_year-8)
-        d18 = '{:d}-06-30'.format(this_year-9)
-        d20 = '{:d}-06-30'.format(this_year-10)
+    # if d2 > today_str:
+    d2 = '{:d}-06-30'.format(this_year-1)
+    d4 = '{:d}-06-30'.format(this_year-2)
+    d6 = '{:d}-06-30'.format(this_year-3)
+    d8 = '{:d}-06-30'.format(this_year-4)
+    d10 = '{:d}-06-30'.format(this_year-5)
+    d12 = '{:d}-06-30'.format(this_year-6)
+    d14 = '{:d}-06-30'.format(this_year-7)
+    d16 = '{:d}-06-30'.format(this_year-8)
+    d18 = '{:d}-06-30'.format(this_year-9)
+    d20 = '{:d}-06-30'.format(this_year-10)
     return [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20]
 
 
